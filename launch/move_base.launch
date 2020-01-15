@@ -1,0 +1,34 @@
+<launch>
+  <master auto="start"/>
+  <param name="/use_sim_time" value="true"/>
+  
+  <!-- map file -->
+  <arg name="map_file" default="$(find omnivelma_2d_nav)/maps/lab_map.yaml"/>
+  
+  <!-- Base Velma Transforms and packages -->
+  <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
+    <!-- <param name="frame_id" value="odom" />  -->
+    <!-- ?????????? -->
+  </node>
+
+  <include file="$(find omnivelma_2d_nav)/launch/amcl_omni.launch" />
+  <include file="$(find omnivelma_2d_nav)/launch/ekf_odom.launch" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"  >
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/local_costmap.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/global_planner.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/local_planner.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/move_base_params.yaml" command="load" />
+
+    <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+    <!--<param name="base_local_planner" value="eband_local_planner/EBandPlannerROS"/>-->
+    <!--<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />-->
+
+    <remap from="odom" to="/odometry/filtered"/>
+  </node>
+</launch>

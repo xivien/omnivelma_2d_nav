@@ -1,0 +1,41 @@
+# http://wiki.ros.org/dwa_local_planner#Parameters
+# https://arxiv.org/pdf/1706.09068.pdf
+
+# DwaPlanner is not optimal for holonomic robot
+DWAPlannerROS:
+  max_vel_trans: 1.0  # absolute value
+  min_vel_trans: 0.1
+
+  max_vel_x: 0.3 # max v_x dla robota
+  min_vel_x: -0.3 # min v_x dla robota
+
+  max_vel_y: 0.3 # max v_y dla robota robot jest holonomiczny
+  min_vel_y: -0.3 # min v_y dla robota
+
+  min_vel_theta: 0.0 # min omega dla robota
+
+  yaw_goal_tolerance: 0.3 #The tolerance in radians for the controller in yaw/rotation when achieving its goal 
+  xy_goal_tolerance: 0.3 #The tolerance in meters for the controller in the x & y distance when achieving a goal 
+  latch_xy_goal_tolerance: true #robot zatrzyma sie po osiagnieciu celu w zakresie tolerancji nawet jesli zatrzyma sie poza ta tolerancja
+
+  sim_time: 5 # symulowanie czasu do przodu w trajektorii [s]
+  vx_samples: 5 #liczba probek uzywana przy liczeniu mozliwych predkosci x
+  vth_samples: 10 #liczba probek uzywana przy liczeniu mozliwych predkosci theta
+
+  occdist_scale: 0.02 # jak bardzo robot powinien starac sie unikac przeszkod ( mniejsze to robot latwiej przejedzie przez drzwi itd)
+
+  path_distance_bias: 0.5 # chec trzymania sie sciezki domyslne 0.6
+  goal_distance_bias: 1 # chec dotarcia do celu krotsza droga domyslne 0.8 steruje tez predkoscia
+  # # cost =
+  #   # path_distance_bias * (distance to path from the endpoint of the trajectory in meters)
+  #   # + goal_distance_bias * (distance to local goal from the endpoint of the trajectory in meters)
+  #   # + occdist_scale * (maximum obstacle cost along the trajectory in obstacle cost (0-254))
+
+  controller_frequency: 10 # czestotliwosc wysylania polecen
+
+
+# THESE TWO SHOULD BE BETTER FOR HOLONOMIC MOVEMENT
+# TebLocalPlannerROS:
+
+
+# EBandPlannerROS:

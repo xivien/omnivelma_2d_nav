@@ -1,0 +1,24 @@
+<launch>
+
+  <node pkg="omnivelma_2d_nav" name="omnivelma_speed_broadcaster" type="omnivelma_speed_broadcaster" output="screen">
+    <param name="cmd_receive_topic" value="cmd_vel" />
+    <param name="cmd_send_topic" value="omnivelma/vels" />
+    <param name="rotation" type="str" value="90" />
+  </node>
+
+  <node pkg="omnivelma_2d_nav" name="camera_tf_broadcaster" type="camera_tf_broadcaster" />
+  <node pkg="omnivelma_2d_nav" name="laser_tf_broadcaster" type="laser_tf_broadcaster" />
+  <!--<node pkg="omnivelma_2d_nav" name="omnivelma_tf_broadcaster" type="omnivelma_tf_broadcaster" />-->
+
+  <!-- rviz vizualization -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find omnivelma_2d_nav)/rviz/config.rviz"/> 
+
+  <!-- Transforms for urdf visualization in rviz -->
+  <!-- <node pkg="omnivelma_2d_nav" name="omnivelma_tf_urdf_broadcaster" type="omnivelma_tf_urdf_broadcaster" /> -->
+  
+  <!-- MERGER -->
+  <include file="$(find omnivelma_2d_nav)/launch/laserscan_multi_merger.launch" />
+
+  <!-- LASER SCAN MATCHER -->
+  <include file="$(find omnivelma_2d_nav)/launch/laser_scan_matcher.launch" />
+</launch>

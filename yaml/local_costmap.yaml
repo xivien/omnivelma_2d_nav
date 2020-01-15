@@ -1,0 +1,47 @@
+local_costmap:
+    plugins: # warstwy mapy
+        - {name: obstacles,        type: "costmap_2d::ObstacleLayer"}  # obiekty wykrywane laserem    
+        - {name: inflation,        type: "costmap_2d::InflationLayer"}  #mapa powiekszona o rozmiar robota (robot w nawigacji jest punktem materialnym)
+
+
+
+    global_frame: odom  # globalny uklad odniesienia w ktorym dziala mapa
+    robot_base_frame: omnivelma # nazwa frame z poczatkiem ukladu robota
+
+    always_send_full_costmap: false  # pelna mapa kosztow jest publikowana przy kazdym odswiezeniu  
+    update_frequency: 4.0          # publikowanie mapy zeby rviz mogl widziec 
+    publish_frequency: 4.0         # czestotliwosc odswiezania mapy
+    static_map: false
+    rolling_window: true            # keeps the robot in the center of the costmap as it moves 
+    # throughout the world, dropping obstacle information from the map as the robot moves too far from a given area. 
+    footprint: [[-0.45, -0.4], [0.45, -0.4], [0.45, 0.4], [-0.45, 0.4]] # prostokatne wymiary robota         
+    footprint_padding: 0.01
+    width: 6.0
+    height: 6.0
+    origin_x: -3.0
+    origin_y: -3.0
+
+    resolution: 0.04    # rozdzielczosc - powinna byc taka sama lub lepsza niz rozdzielczosc zalaczonej mapy           
+    transform_tolerance: 0.5 # maksymalne opoznienie tfa
+
+
+    # http://wiki.ros.org/costmap_2d/hydro/obstacles
+    obstacles:  # parametry warstwy przeszkod wykrywanych przez laser
+        observation_sources: laser_scan  # typ czujnika
+        laser_scan: 
+            data_type: LaserScan       #   rodzaj msg                
+            sensor_frame: omnivelma      # sensor_frame - tf  lasera     
+            clearing: true          # clearing - laser moze czyscic wolna przestrzen
+            marking: true           # marking - laser oznacza przeszkody
+            topic: /scan            # topic - topic lasera
+            inf_is_valid: false     # inf_is_valid - skalowanie nieskonczonych pomiarow do zasiegu lasera
+        track_unknown_space: false  # pixel moze miec dwa stany zajety lub wolny, nie ma stanu unknown
+        obstacle_range: 3.5 # max odleglosc wykrywanych nowych przeszkod
+        raytrace_range: 3.5 # max dystans trzymania w pamieci starych przeszkod
+        footprint_clearing_enabled: true  # przestrzen zajmowana przez robota jest z zalozenia wolna
+    
+        # http://wiki.ros.org/costmap_2d/hydro/inflation
+    inflation:  # parametry warstwy inflacji
+        inflation_radius: 0.3     # promien na ktorym uzywana jest funkcja inflacji
+        cost_scaling_factor: 1    # szybkosc postepowania wykladnika
+                                # exp(-1.0 * cost_scaling_factor * (distance_from_obstacle - inscribed_radius)) * (costmap_2d::INSCRIBED_INFLATED_OBSTACLE - 1), 
