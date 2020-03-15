@@ -2,6 +2,7 @@
   <param name="/use_sim_time" value="true"/>
 
   <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
+  <include file="$(find omnivelma_2d_nav)/launch/ekf_odom.launch" />
 
   <node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
     <remap from="scan" to="/scan" />
