@@ -16,6 +16,7 @@
 
   <include file="$(find omnivelma_2d_nav)/launch/amcl_omni.launch" />
   <include file="$(find omnivelma_2d_nav)/launch/ekf_odom.launch" />
+  <include file="$(find omnivelma_2d_nav)/launch/ekf_map.launch" />
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"  >
     <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" />
@@ -30,5 +31,6 @@
     <!--<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />-->
 
     <remap from="odom" to="/odometry/filtered"/>
+    
   </node>
 </launch>

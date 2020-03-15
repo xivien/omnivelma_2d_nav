@@ -6,7 +6,7 @@ local_costmap:
 
 
     global_frame: odom  # globalny uklad odniesienia w ktorym dziala mapa
-    robot_base_frame: omnivelma # nazwa frame z poczatkiem ukladu robota
+    robot_base_frame: base_footprint # nazwa frame z poczatkiem ukladu robota
 
     always_send_full_costmap: false  # pelna mapa kosztow jest publikowana przy kazdym odswiezeniu  
     update_frequency: 4.0          # publikowanie mapy zeby rviz mogl widziec 

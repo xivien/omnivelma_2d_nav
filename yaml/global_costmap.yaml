@@ -5,7 +5,7 @@ global_costmap:
         - {name: inflation,        type: "costmap_2d::InflationLayer"} #mapa powiekszona o rozmiar robota (robot w nawigacji jest punktem materialnym)
         
     global_frame: map  # globalny uklad odniesienia w ktorym dziala mapa
-    robot_base_frame: omnivelma # nazwa frame z poczatkiem ukladu robota
+    robot_base_frame: base_footprint # nazwa frame z poczatkiem ukladu robota
     footprint: [[-0.45, -0.4], [0.45, -0.4], [0.45, 0.4], [-0.45, 0.4]] # prostokatne wymiary robota  
     footprint_padding: 0.01
 
