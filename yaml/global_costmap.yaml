@@ -12,8 +12,8 @@ global_costmap:
     transform_tolerance: 1.0 # maksymalne opoznienie tfa
     static_map: true # mapa statyczna
 
-    update_frequency: 4.0  # czestotliwosc odswiezania mapy
-    publish_frequency: 4.0 # publikowanie mapy zeby rviz mogl widziec   
+    update_frequency: 5.0  # czestotliwosc odswiezania mapy
+    publish_frequency: 5.0 # publikowanie mapy zeby rviz mogl widziec   
     resolution: 0.04       # rozdzielczosc mapy
     rolling_window: false # dla statycznej musi byc false
     # keeps the robot in the center of the costmap as it moves 

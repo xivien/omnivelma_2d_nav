@@ -1,9 +1,3 @@
 <launch>
 	<node name="gazebo" type="gazebo" pkg="omnivelma_2d_nav" />
-
-	<!-- sdf to urdf convert for rviz -->
-	<!-- <param name="robot_description" textfile="$(find omnivelma_2d_nav)/rviz/model.urdf" />
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
-		<param name="publish_frequency" type="double" value="20" />
-	</node> -->
 </launch>

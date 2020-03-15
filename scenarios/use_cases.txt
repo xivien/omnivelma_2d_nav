@@ -1,0 +1,24 @@
+Possible use cases:
+Firstly run "source init.sh" #TODO dynamic package path
+1. Navigation on a static global map:
+    - EKF filter for global localization
+    - EKF filter for odometry
+    - Move base package for Navigation
+
+usage: ./nav_static_map.sh
+
+2. Navigation on a dynamic map:
+    - Global localization from Gmapping package - no EKD
+    - EKF filter for odometry
+    - Move base package for Navigation 
+
+usage: ./nav_dynamic_map.sh
+
+3. Gmapping map building
+    - EKF filter for odometry
+
+usage:  First terminal: ./mapping.sh 
+        Second terminal: rosrun teleop_twist_keyboard teleop_twist_keyboard.py 
+
+        Saving map: 
+        rosrun map_server map_saver -f PATH

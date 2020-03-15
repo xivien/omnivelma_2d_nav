@@ -9,14 +9,20 @@
   <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
 
   <!-- Run the map server -->
-  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
-    <!-- <param name="frame_id" value="odom" />  -->
-    <!-- ?????????? -->
-  </node>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
 
-  <include file="$(find omnivelma_2d_nav)/launch/amcl_omni.launch" />
-  <include file="$(find omnivelma_2d_nav)/launch/ekf_odom.launch" />
-  <include file="$(find omnivelma_2d_nav)/launch/ekf_map.launch" />
+  <!-- <node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
+    <remap from="scan" to="/scan" />
+    <param name="base_frame" value="base_footprint" />
+    <param name="map_udpate_interval" value="2.0"/>
+    <param name="delta" value="0.04" />
+    <param name="map_update_interval" value="2.0"/>
+    <param name="transform_publish_period" value="0.05"/>
+  </node> -->
+
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/amcl_omni.launch" />
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map.launch" />
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"  >
     <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" />

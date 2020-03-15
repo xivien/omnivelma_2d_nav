@@ -17,8 +17,8 @@
   <!-- <node pkg="omnivelma_2d_nav" name="omnivelma_tf_urdf_broadcaster" type="omnivelma_tf_urdf_broadcaster" /> -->
   
   <!-- MERGER -->
-  <include file="$(find omnivelma_2d_nav)/launch/laserscan_multi_merger.launch" />
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/laserscan_multi_merger.launch" />
 
   <!-- LASER SCAN MATCHER -->
-  <include file="$(find omnivelma_2d_nav)/launch/laser_scan_matcher.launch" />
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/laser_scan_matcher.launch" />
 </launch>
