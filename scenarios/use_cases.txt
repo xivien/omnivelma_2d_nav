@@ -8,7 +8,7 @@ Firstly run "source init.sh" #TODO dynamic package path
 usage: ./nav_static_map.sh
 
 2. Navigation on a dynamic map:
-    - Global localization from Gmapping package - no EKD
+    - Global localization from Gmapping package with EKF
     - EKF filter for odometry
     - Move base package for Navigation 
 

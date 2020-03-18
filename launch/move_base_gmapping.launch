@@ -5,9 +5,12 @@
   <!-- Base Velma Transforms and packages -->
   <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
 
-  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/amcl_omni.launch" /> -->
+
+  <!-- Gmapping pose  publisher -->
+  <node pkg="omnivelma_2d_nav" name="gmapping_pose_broadcaster" type="gmapping_pose_broadcaster" />
+
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
-  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map.launch" /> -->
+  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_gmapping.launch" /> -->
   
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/gmapping_conf.launch" />
 

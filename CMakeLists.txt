@@ -15,6 +15,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
   tf
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -107,9 +110,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
+  # INCLUDE_DIRS include
 #  LIBRARIES omnivelma_2d_nav
-  CATKIN_DEPENDS actionlib_msgs move_base_msgs nav_msgs omnivelma_msgs roscpp sensor_msgs tf
+  CATKIN_DEPENDS actionlib_msgs move_base_msgs nav_msgs omnivelma_msgs roscpp sensor_msgs tf tf2 tf2_ros
 #  DEPENDS system_lib
 )
 
@@ -150,8 +153,8 @@ target_link_libraries(laser_tf_broadcaster ${catkin_LIBRARIES})
 add_executable(camera_tf_broadcaster src/camera_tf_broadcaster.cpp)
 target_link_libraries(camera_tf_broadcaster ${catkin_LIBRARIES})
 
-add_executable(omnivelma_tf_urdf_broadcaster src/omnivelma_tf_broadcaster.cpp)
-target_link_libraries(omnivelma_tf_urdf_broadcaster ${catkin_LIBRARIES})
+add_executable(gmapping_pose_broadcaster src/gmapping_pose_broadcaster.cpp)
+target_link_libraries(gmapping_pose_broadcaster ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
