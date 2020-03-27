@@ -10,7 +10,7 @@
   <node pkg="omnivelma_2d_nav" name="gmapping_pose_broadcaster" type="gmapping_pose_broadcaster" />
 
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
-  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_gmapping.launch" /> -->
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_gmapping.launch" />
   
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/gmapping_conf.launch" />
 
@@ -26,7 +26,7 @@
     <!--<param name="base_local_planner" value="eband_local_planner/EBandPlannerROS"/>-->
     <!--<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />-->
 
-    <remap from="odom" to="/odometry/filtered"/>
+    <remap from="odom" to="/gmapping/filtered"/>
     
   </node>
 </launch>

@@ -3,10 +3,6 @@
   <!--  clear_params="true" -->
     <rosparam command="load" file="$(find omnivelma_2d_nav)/yaml/ekf_map.yaml" />
     <remap from="odometry/filtered" to="amcl/filtered"/>
-    <!--  Placeholder for output topic remapping
-
-    <remap from="accel/filtered" to=""/>
-    -->
 
   </node>
 </launch>

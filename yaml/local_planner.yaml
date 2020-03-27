@@ -4,7 +4,7 @@
 # DwaPlanner is not optimal for holonomic robot
 DWAPlannerROS:
   max_vel_trans: 1.0  # absolute value
-  min_vel_trans: 0.1
+  min_vel_trans: 0.0
 
   max_vel_x: 0.3 # max v_x dla robota
   min_vel_x: -0.3 # min v_x dla robota

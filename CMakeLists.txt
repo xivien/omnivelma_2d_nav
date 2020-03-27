@@ -144,9 +144,6 @@ include_directories(
 add_executable(omnivelma_speed_broadcaster src/omnivelma_speed_broadcaster.cpp)
 target_link_libraries(omnivelma_speed_broadcaster ${catkin_LIBRARIES})
 
-add_executable(omnivelma_tf_broadcaster src/omnivelma_tf_broadcaster.cpp)
-target_link_libraries(omnivelma_tf_broadcaster ${catkin_LIBRARIES})
-
 add_executable(laser_tf_broadcaster src/laser_tf_broadcaster.cpp)
 target_link_libraries(laser_tf_broadcaster ${catkin_LIBRARIES})
 
@@ -155,6 +152,9 @@ target_link_libraries(camera_tf_broadcaster ${catkin_LIBRARIES})
 
 add_executable(gmapping_pose_broadcaster src/gmapping_pose_broadcaster.cpp)
 target_link_libraries(gmapping_pose_broadcaster ${catkin_LIBRARIES})
+
+add_executable(odom_noise src/odom_noise.cpp)
+target_link_libraries(odom_noise ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

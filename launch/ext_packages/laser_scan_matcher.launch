@@ -9,10 +9,9 @@
         <param name="fixed_frame" value="odom"/>
         <param name="base_frame" value="base_footprint"/>
 
-
         <param name="do_compute_covariance" value="1"/>
         <param name="publish_pose_with_covariance_stamped" value="true"/>
-
+        <remap from="pose_with_covariance_stamped" to="/odom/laser_scan_matcher"/>
 
     </node>
 
