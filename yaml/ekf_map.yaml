@@ -1,4 +1,4 @@
-frequency: 10
+frequency: 5
 two_d_mode: true
 publish_tf: true
 
@@ -7,12 +7,12 @@ odom_frame: odom            # Defaults to "odom" if unspecified
 base_link_frame: base_footprint  # Defaults to "base_link" if unspecified
 world_frame: map           # Defaults to the value of odom_frame if unspecified
 
-transform_time_offset: 0.1
+transform_time_offset: 0.22
 dynamic_process_noise_covariance: false
 # predict_to_current_time: true
 # transform_timeout: 0.0
 
-odom0: /odom
+odom0: /odom/noisy
 odom0_config: [false,  false,  false,
                false, false, false,
                true, true, false,

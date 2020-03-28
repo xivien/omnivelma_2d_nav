@@ -7,12 +7,13 @@
 
 
   <!-- Gmapping pose  publisher -->
-  <node pkg="omnivelma_2d_nav" name="gmapping_pose_broadcaster" type="gmapping_pose_broadcaster" />
+  <!-- <node pkg="omnivelma_2d_nav" name="gmapping_pose_broadcaster" type="gmapping_pose_broadcaster" /> -->
 
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
-  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_gmapping.launch" />
+  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_gmapping.launch" /> -->
   
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/gmapping_conf.launch" />
+  <!-- <param name="/slam_gmapping/transform_publish_period" value="0.0"/> -->
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"  >
     <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" />
@@ -26,7 +27,7 @@
     <!--<param name="base_local_planner" value="eband_local_planner/EBandPlannerROS"/>-->
     <!--<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />-->
 
-    <remap from="odom" to="/gmapping/filtered"/>
+    <remap from="odom" to="odom/filtered"/>
     
   </node>
 </launch>

@@ -11,7 +11,7 @@ class PoseDrawer
 public:
   PoseDrawer() : tf2_(buffer_), target_frame_("map"), tf2_filter_(point_sub_, buffer_, target_frame_, 10, 0)
   {
-    point_sub_.subscribe(n_, "/pose_with_covariance_stamped", 10);
+    point_sub_.subscribe(n_, "/odom/laser_scan_matcher", 10);
     pub = n_.advertise<geometry_msgs::PoseWithCovarianceStamped>("/gmapping/pose", 10);
     tf2_filter_.registerCallback(boost::bind(&PoseDrawer::msgCallback, this, _1));
   }

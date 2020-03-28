@@ -15,7 +15,7 @@ public:
   {
     var_ = 0.05;
     pub = nh->advertise<nav_msgs::Odometry>("/odom/noisy", 10);
-    number_subscriber = nh->subscribe("/odom", 1000, &OdomNoise::callback_odom, this);
+    number_subscriber = nh->subscribe("/odom/throttled", 1000, &OdomNoise::callback_odom, this);
   }
   void callback_odom(const nav_msgs::Odometry &odom)
   {

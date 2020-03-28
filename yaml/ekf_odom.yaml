@@ -1,4 +1,4 @@
-frequency: 10
+frequency: 20
 two_d_mode: true
 publish_tf: true
 
@@ -23,7 +23,7 @@ world_frame: odom           # Defaults to the value of odom_frame if unspecified
 #  This directly implies that mostly the specified desired output rate is not met since the filter has to wait 
 #  for transforms when updating.
 
-odom0: /odom
+odom0: /odom/noisy
 odom0_config: [false,  false,  false,
                false, false, false,
                true, true, false,
