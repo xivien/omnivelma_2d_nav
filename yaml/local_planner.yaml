@@ -2,40 +2,190 @@
 # https://arxiv.org/pdf/1706.09068.pdf
 
 # DwaPlanner is not optimal for holonomic robot
-DWAPlannerROS:
-  max_vel_trans: 1.0  # absolute value
-  min_vel_trans: 0.0
+# DWAPlannerROS:
+#   max_vel_trans: 1.0  # absolute value
+#   min_vel_trans: 0.0
 
-  max_vel_x: 0.3 # max v_x dla robota
-  min_vel_x: -0.3 # min v_x dla robota
+#   max_vel_x: 0.3 # max v_x dla robota
+#   min_vel_x: -0.3 # min v_x dla robota
 
-  max_vel_y: 0.3 # max v_y dla robota robot jest holonomiczny
-  min_vel_y: -0.3 # min v_y dla robota
+#   max_vel_y: 0.3 # max v_y dla robota robot jest holonomiczny
+#   min_vel_y: -0.3 # min v_y dla robota
 
-  min_vel_theta: 0.0 # min omega dla robota
+#   min_vel_theta: 0.0 # min omega dla robota
 
-  yaw_goal_tolerance: 0.3 #The tolerance in radians for the controller in yaw/rotation when achieving its goal 
-  xy_goal_tolerance: 0.3 #The tolerance in meters for the controller in the x & y distance when achieving a goal 
-  latch_xy_goal_tolerance: true #robot zatrzyma sie po osiagnieciu celu w zakresie tolerancji nawet jesli zatrzyma sie poza ta tolerancja
+#   yaw_goal_tolerance: 0.3 #The tolerance in radians for the controller in yaw/rotation when achieving its goal 
+#   xy_goal_tolerance: 0.3 #The tolerance in meters for the controller in the x & y distance when achieving a goal 
+#   latch_xy_goal_tolerance: true #robot zatrzyma sie po osiagnieciu celu w zakresie tolerancji nawet jesli zatrzyma sie poza ta tolerancja
 
-  sim_time: 5 # symulowanie czasu do przodu w trajektorii [s]
-  vx_samples: 5 #liczba probek uzywana przy liczeniu mozliwych predkosci x
-  vth_samples: 10 #liczba probek uzywana przy liczeniu mozliwych predkosci theta
+#   sim_time: 5 # symulowanie czasu do przodu w trajektorii [s]
+#   vx_samples: 5 #liczba probek uzywana przy liczeniu mozliwych predkosci x
+#   vth_samples: 10 #liczba probek uzywana przy liczeniu mozliwych predkosci theta
 
-  occdist_scale: 0.02 # jak bardzo robot powinien starac sie unikac przeszkod ( mniejsze to robot latwiej przejedzie przez drzwi itd)
+#   occdist_scale: 0.02 # jak bardzo robot powinien starac sie unikac przeszkod ( mniejsze to robot latwiej przejedzie przez drzwi itd)
 
-  path_distance_bias: 0.5 # chec trzymania sie sciezki domyslne 0.6
-  goal_distance_bias: 1 # chec dotarcia do celu krotsza droga domyslne 0.8 steruje tez predkoscia
-  # # cost =
-  #   # path_distance_bias * (distance to path from the endpoint of the trajectory in meters)
-  #   # + goal_distance_bias * (distance to local goal from the endpoint of the trajectory in meters)
-  #   # + occdist_scale * (maximum obstacle cost along the trajectory in obstacle cost (0-254))
+#   path_distance_bias: 0.5 # chec trzymania sie sciezki domyslne 0.6
+#   goal_distance_bias: 1 # chec dotarcia do celu krotsza droga domyslne 0.8 steruje tez predkoscia
+#   # # cost =
+#   #   # path_distance_bias * (distance to path from the endpoint of the trajectory in meters)
+#   #   # + goal_distance_bias * (distance to local goal from the endpoint of the trajectory in meters)
+#   #   # + occdist_scale * (maximum obstacle cost along the trajectory in obstacle cost (0-254))
 
-  controller_frequency: 10 # czestotliwosc wysylania polecen
+#   controller_frequency: 10 # czestotliwosc wysylania polecen
 
 
 # THESE TWO SHOULD BE BETTER FOR HOLONOMIC MOVEMENT
-# TebLocalPlannerROS:
+TebLocalPlannerROS:
+   
+ # Trajectory
+  
+ teb_autosize: True
+ dt_ref: 0.3
+ dt_hysteresis: 0.1
+ max_samples: 500
+ global_plan_overwrite_orientation: True
+ allow_init_with_backwards_motion: False
+ max_global_plan_lookahead_dist: 3.0
+ global_plan_viapoint_sep: -1
+ global_plan_prune_distance: 1
+ exact_arc_length: False
+ feasibility_check_no_poses: 5
+ publish_feedback: False
+    
+ # Robot
+         
+ max_vel_x: 0.4
+ max_vel_x_backwards: 0.2
+ max_vel_y: 0.1
+ max_vel_theta: 0.3
+ acc_lim_x: 0.5
+ acc_lim_y: 0.2
+ acc_lim_theta: 0.5
+ min_turning_radius: 0.0 # omni-drive robot (can turn on place!)
 
+ footprint_model:
+   type: "point"
+
+ # GoalTolerance
+    
+ xy_goal_tolerance: 0.2
+ yaw_goal_tolerance: 0.1
+ free_goal_vel: False
+ complete_global_plan: True
+    
+ # Obstacles
+    
+ min_obstacle_dist: 0.25 # This value must also include our robot radius, since footprint_model is set to "point".
+ inflation_dist: 0.6
+ include_costmap_obstacles: True
+ costmap_obstacles_behind_robot_dist: 1.0
+ obstacle_poses_affected: 15
+ costmap_converter_plugin: ""
+ costmap_converter_spin_thread: True
+ costmap_converter_rate: 5
+
+ # Optimization
+    
+ no_inner_iterations: 5
+ no_outer_iterations: 4
+ optimization_activate: True
+ optimization_verbose: False
+ penalty_epsilon: 0.1
+ obstacle_cost_exponent: 4
+ weight_max_vel_x: 2
+ weight_max_vel_y: 2
+ weight_max_vel_theta: 1
+ weight_acc_lim_x: 1
+ weight_acc_lim_y: 1
+ weight_acc_lim_theta: 1
+ weight_kinematics_nh: 1 # WE HAVE A HOLONOMIC ROBOT, JUST ADD A SMALL PENALTY
+ weight_kinematics_forward_drive: 1
+ weight_kinematics_turning_radius: 1
+ weight_optimaltime: 1 # must be > 0
+ weight_shortest_path: 0
+ weight_obstacle: 100
+ weight_inflation: 0.2
+ weight_dynamic_obstacle: 10
+ weight_dynamic_obstacle_inflation: 0.2
+ weight_viapoint: 1
+ weight_adapt_factor: 2
+
+ # Homotopy Class Planner
+
+ enable_homotopy_class_planning: False
+ enable_multithreading: True
+ max_number_classes: 4
+ selection_cost_hysteresis: 1.0
+ selection_prefer_initial_plan: 0.9
+ selection_obst_cost_scale: 1.0
+ selection_alternative_time_cost: False
+ 
+ roadmap_graph_no_samples: 15
+ roadmap_graph_area_width: 5
+ roadmap_graph_area_length_scale: 1.0
+ h_signature_prescaler: 0.5
+ h_signature_threshold: 0.1
+ obstacle_heading_threshold: 0.45
+ switching_blocking_period: 0.0
+ viapoints_all_candidates: True
+ delete_detours_backwards: True
+ max_ratio_detours_duration_best_duration: 3.0
+ visualize_hc_graph: False
+ visualize_with_time_as_z_axis_scale: False
+
+# Recovery
+ 
+ shrink_horizon_backup: True
+ shrink_horizon_min_duration: 10
+ oscillation_recovery: True
+ oscillation_v_eps: 0.1
+ oscillation_omega_eps: 0.1
+ oscillation_recovery_min_duration: 10
+ oscillation_filter_duration: 10
 
 # EBandPlannerROS:
+
+#   differential_drive: False 
+#   holonomic_robot: true
+
+  # xy_goal_tolerance: 0.15 # m
+  # yaw_goal_tolerance: 0.2 # rad
+  # rot_stopped_vel: 0.01
+  # trans_stopped_vel: 0.01
+
+  # marker_lifetime: 0.5
+  
+  # #===  Elastic Band Parameters  ===
+  # eband_min_relative_overlap: 0.5
+  # eband_tiny_bubble_distance: 0.1
+  # eband_tiny_bubble_expansion: 0.1
+  # eband_internal_force_gain: 1.0
+  # eband_external_force_gain: 2.0
+  # num_iterations_eband_optimization: 3
+  # eband_equilibrium_approx_max_recursion_depth: 4
+  # eband_equilibrium_relative_overshoot: 0.75
+  # eband_significant_force_lower_boundt: 0.15
+  # costmap_weight: 20.0
+
+  
+  # #===  Trajectory Controller Parameters  ===
+
+  # max_vel_lin: 5
+  # max_vel_th: 0.4
+  # min_vel_lin: 0.2
+  # min_vel_th: 0.2
+  # min_in_place_vel_th: 0.0
+  # in_place_trans_vel: 0.0
+  # k_prop: 4.0    # angular velocity pid
+  # k_damp: 3.5
+  
+  # Ctrl_Rate: 10.0
+  # max_acceleration: 1.0
+  # virtual_mass: 0.75
+  # max_translational_acceleration : 1.0
+  # max_rotational_acceleration : 0.4
+  # rotation_correction_threshold : 0.5
+
+  # bubble_velocity_multiplier : 5.0
+  # rotation_threshold_multiplier : 0.3
+  # disallow_hysteresis : False

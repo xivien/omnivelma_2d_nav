@@ -23,7 +23,7 @@ odom0_config: [false,  false,  false,
 # If the odometry provides both orientation and angular velocity, fuse the orientation.
 odom0_differential: true
 
-pose0: /amcl_pose
+pose0: /gmapping_pose
 pose0_config: [true,  true,  false,
                false, false, true,
                false, false, false,
