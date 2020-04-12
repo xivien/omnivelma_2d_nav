@@ -5,9 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Odometry1
-        - /Odometry2
-        - /AMCL_Pose1
       Splitter Ratio: 0.5
     Tree Height: 483
   - Class: rviz/Selection
@@ -425,4 +422,4 @@ Window Geometry:
     collapsed: false
   Width: 1557
   X: 422
-  Y: 368
+  Y: 338

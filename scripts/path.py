@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-
 import rospy
 from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseStamped
 
 
 class Path_gen:
-    def __init__(self,dir=1):
+    def __init__(self, dir=1):
         pub = rospy.Publisher("/path", Path, queue_size=10)
         mssg = Path()
         P1 = PoseStamped()
@@ -15,7 +14,7 @@ class Path_gen:
         P3 = PoseStamped()
         P4 = PoseStamped()
 
-        a = 2 # bok kwadratu
+        a = 2  # square side length
         P1.pose.position.x = dir*a
         mssg.poses.append(P1)
 
@@ -31,9 +30,10 @@ class Path_gen:
         pub.publish(mssg)
         rospy.loginfo("Path sent")
 
+
 if __name__ == '__main__':
     rospy.init_node('Path')
-    Path_gen(dir=1) # 1 - lewo, -1 prawy
+    Path_gen(dir=1)  # 1 - left, -1 right
     pub = rospy.Publisher("/path", Path, queue_size=10)
 
     rospy.spin()

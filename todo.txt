@@ -1,3 +1,0 @@
-- local planner new alghoritms
-- odom noise
- - change gmapping pose to sub to odom and publish it as posewithcovstamped

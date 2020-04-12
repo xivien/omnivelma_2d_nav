@@ -1,9 +1,9 @@
 <launch>
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_map">
     <!-- clear_params="true" -->
-    <rosparam command="load" file="$(find omnivelma_2d_nav)/yaml/ekf_map_g.yaml" />
+    <rosparam command="load" file="$(find omnivelma_2d_nav)/yaml/ekf_map.yaml" />
     <remap from="odometry/filtered" to="gmapping/filtered"/>
-
+    <param pose0 = "/gmapping/pose"/>
 
     <!--  Placeholder for output topic remapping
     
