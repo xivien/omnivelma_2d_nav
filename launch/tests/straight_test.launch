@@ -1,0 +1,9 @@
+<launch>
+    <!-- Base Velma Transforms and packages -->
+    <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
+
+    <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
+    <!-- Path Execution -->
+    <node pkg="omnivelma_2d_nav" name="Straight_test" type="straight_test.py" output="screen"/>
+
+</launch>

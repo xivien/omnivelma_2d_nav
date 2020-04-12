@@ -1,9 +1,0 @@
-<launch>
-  <param name="/use_sim_time" value="true"/>
-
-  <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
-  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
-  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/gmapping_conf.launch" />
-
-
-</launch>
