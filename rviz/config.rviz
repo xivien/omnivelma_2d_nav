@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /Local_Plan1
       Splitter Ratio: 0.5
     Tree Height: 483
   - Class: rviz/Selection
@@ -91,7 +92,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /move_base/DWAPlannerROS/global_plan
+      Topic: /move_base/GlobalPlanner/plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -114,7 +115,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.009999999776482582
       Shaft Length: 0.10000000149011612
-      Topic: /move_base/DWAPlannerROS/local_plan
+      Topic: /move_base/TebLocalPlannerROS/local_plan
       Unreliable: false
       Value: true
     - Alpha: 1
@@ -276,7 +277,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Keep: 1
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -292,7 +293,7 @@ Visualization Manager:
         Value: Arrow
       Topic: /amcl/filtered
       Unreliable: false
-      Value: true
+      Value: false
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
       Covariance:
@@ -310,7 +311,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Keep: 1
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -326,7 +327,7 @@ Visualization Manager:
         Value: Arrow
       Topic: /odom/filtered
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.10000000149011612
@@ -385,16 +386,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.81077766418457
+      Distance: 8.764692306518555
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.13197125494480133
-        Y: 0.9973651170730591
-        Z: 1.1673797369003296
+        X: 3.702800750732422
+        Y: -0.25406166911125183
+        Z: 1.1712126731872559
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -421,5 +422,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1557
-  X: 422
-  Y: 338
+  X: 2707
+  Y: 216

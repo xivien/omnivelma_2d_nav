@@ -6,13 +6,16 @@
   <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
 
   <!-- Gmapping pose  publisher -->
-  <node pkg="omnivelma_2d_nav" name="gmapping_pose_broadcaster" type="gmapping_pose_broadcaster" />
-
-  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
-  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_gmapping.launch" /> -->
+  <!-- <node pkg="omnivelma_2d_nav" name="gmapping_pose_broadcaster" type="gmapping_pose_broadcaster" /> -->
+  
 
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/gmapping_conf.launch" />
-  <!-- <param name="/slam_gmapping/transform_publish_period" value="0.0"/> -->
+   <!-- <param name="/slam_gmapping/transform_publish_period" value="0.0"/> -->
+   <!-- NEED to future date transform to use it with navigation -->
+  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/hector_mapping.launch" /> -->
+ 
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
+  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_gmapping.launch" /> -->
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" />

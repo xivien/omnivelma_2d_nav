@@ -6,14 +6,13 @@ global_costmap:
         
     global_frame: map  # globalny uklad odniesienia w ktorym dziala mapa
     robot_base_frame: base_footprint # nazwa frame z poczatkiem ukladu robota
-    footprint: [[-0.45, -0.4], [0.45, -0.4], [0.45, 0.4], [-0.45, 0.4]] # prostokatne wymiary robota  
-    footprint_padding: 0.01
-
-    transform_tolerance: 1.0 # maksymalne opoznienie tfa
+    footprint: [[-0.45, -0.4], [0.45, -0.4], [0.45, 0.4], [-0.45, 0.4]] # prostokatne wymiary robota
+    footprint_padding: 0.05
+    robot_radius: 0.0
     static_map: true # mapa statyczna
 
     update_frequency: 5.0  # czestotliwosc odswiezania mapy
-    publish_frequency: 5.0 # publikowanie mapy zeby rviz mogl widziec   
+    publish_frequency: 1.0 # publikowanie mapy zeby rviz mogl widziec   
     resolution: 0.04       # rozdzielczosc mapy
     rolling_window: false # dla statycznej musi byc false
     # keeps the robot in the center of the costmap as it moves 
@@ -22,9 +21,9 @@ global_costmap:
     static_map:                     # http://wiki.ros.org/costmap_2d/hydro/staticmap
         unknown_cost_value: -1      # wartosc dla nienznanych pixeli
         lethal_cost_threshold: 100  # prog kolizji
-        map_topic: map             # stad bierzemy mape 
+        map_topic: /map             # stad bierzemy mape 
     inflation:  # http://wiki.ros.org/costmap_2d/hydro/inflation
-        inflation_radius: 0.3   # promien na ktorym uzywana jest funkcja inflacji
+        inflation_radius: 1.75   # promien na ktorym uzywana jest funkcja inflacji
 
-        cost_scaling_factor: 1  # szybkosc postepowania wykladnika
+        cost_scaling_factor: 2.58  # szybkosc postepowania wykladnika
                                 # exp(-1.0 * cost_scaling_factor * (distance_from_obstacle - inscribed_radius)) * (costmap_2d::INSCRIBED_INFLATED_OBSTACLE - 1), 
