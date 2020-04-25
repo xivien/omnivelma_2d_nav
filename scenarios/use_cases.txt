@@ -1,5 +1,5 @@
 Possible use cases:
-Firstly run "source init.sh" #TODO dynamic package path
+Firstly run "source init.sh"
 1. Navigation on a static global map:
     - EKF filter for global localization
     - EKF filter for odometry

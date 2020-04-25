@@ -21,6 +21,8 @@ if ! [ -f "$2" ]; then
   echo "$2 not a directory" >&2
   exit 1
 fi
+# update packages sources
+sudo apt-get update
 
 # Check for python-wstool package
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' python-wstool|grep "install ok installed")
