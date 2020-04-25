@@ -1,0 +1,5 @@
+- git: {local-name: src/omnivelma_2d_nav, uri: 'https://github.com/xivien/omnivelma_2d_nav.git', version: 'master'}
+- git: {local-name: src/omnivelma, uri: 'https://github.com/xivien/omnivelma.git', version: 'master'}
+- git: {local-name: src/csm, uri: 'https://github.com/AndreaCensi/csm.git', version: 'master'}
+- git: {local-name: src/ira_laser_tools, uri: 'https://github.com/iralabdisco/ira_laser_tools', version: 'master'}
+- git: {local-name: src/scan_tools, uri: 'https://github.com/dudekw/scan_tools.git', version: 'melodic-devel'}
