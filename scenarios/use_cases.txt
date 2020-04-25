@@ -8,7 +8,7 @@ Firstly run "source init.sh" #TODO dynamic package path
 usage: ./nav_static_map.sh
 
 2. Navigation on a dynamic map and map building:
-    - Global localization from Gmapping package with EKF
+    - SLAM from Hector_mapping package used with global EKF localization filter
     - EKF filter for odometry
     - Move base package for Navigation 
 
@@ -19,8 +19,7 @@ optional:
 Saving map: 
         rosrun map_server map_saver -f PATH
 
-
-3. Running base simulation
+3. Running base simulation without navigation or SLAM
 
 usage: 
         ./base.sh

@@ -156,6 +156,9 @@ target_link_libraries(gmapping_pose_broadcaster ${catkin_LIBRARIES})
 add_executable(odom_noise src/odom_noise.cpp)
 target_link_libraries(odom_noise ${catkin_LIBRARIES})
 
+add_executable(hector_pose_cov src/hector_pose_cov.cpp)
+target_link_libraries(hector_pose_cov ${catkin_LIBRARIES})
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use

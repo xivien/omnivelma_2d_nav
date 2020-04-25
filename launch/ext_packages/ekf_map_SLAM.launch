@@ -1,7 +1,7 @@
 <launch>
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_map">
     <rosparam command="load" file="$(find omnivelma_2d_nav)/yaml/ekf_map.yaml" />
-    <remap from="odometry/filtered" to="gmapping/filtered"/>
-    <param name="pose0" value="/poseupdate"/>
+    <remap from="odometry/filtered" to="slam/filtered"/>
+    <param name="pose0" value="/hector_mapping/pose "/>
   </node>
 </launch>

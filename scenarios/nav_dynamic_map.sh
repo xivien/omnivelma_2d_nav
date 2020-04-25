@@ -8,7 +8,7 @@ PIDGAZ=$!
 sleep 5
 # read -n 1 -p "Press any button to continue loading..." -s
 
-roslaunch omnivelma_2d_nav move_base_gmapping.launch &
+roslaunch omnivelma_2d_nav move_base_SLAM.launch &
 PIDWID=$!
 
 trap "kill $PIDWID; kill $PIDGAZ" SIGINT
