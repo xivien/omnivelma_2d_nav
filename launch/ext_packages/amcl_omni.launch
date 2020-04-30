@@ -1,5 +1,8 @@
 <launch>
   <node pkg="amcl" type="amcl" name="amcl">
+    <!-- false for kalman filter -->
+    <param name="tf_broadcast" value="false" />
+
     <param name="odom_model_type" value="omni-corrected"/>
 
     <param name="transform_tolerance" value="0.2" />
@@ -36,9 +39,6 @@
 
     <param name="odom_frame_id" value="odom"/>
     <param name="base_frame_id" value="base_footprint"/>
-
-    <!-- false for kalman filter -->
-    <param name="tf_broadcast" value="false" />
 
     <param name="initial_pose_x" value="0.0"/>
     <param name="initial_pose_y" value="0.0"/>
