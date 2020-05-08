@@ -1,8 +1,8 @@
 #include <actionlib/client/simple_action_client.h>
-#include <move_base_msgs/MoveBaseAction.h>
-#include <ros/ros.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include <geometry_msgs/Twist.h>
+#include <move_base_msgs/MoveBaseAction.h>
+#include <ros/ros.h>
 #include <std_srvs/Empty.h>
 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
@@ -110,6 +110,7 @@ public:
     {
       ROS_WARN("High covariance \n The robot may crash \n"
                "Aborting navigation");
+      ROS_WARN("Use teleop_twist_keyboard to drive manually and improve localization");
       ros::Duration(10.0).sleep();
     }
     // Send navigation goal
@@ -147,7 +148,9 @@ public:
     goal_.target_pose.pose.orientation.w = 1.0;
 
     ROS_INFO("Sending goal");
-    ac_.sendGoal(goal_);
+    ac_.sendGoal(goal_, boost::bind(&MoveBaseController::doneCb, this, _1, _2),
+                 actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>::SimpleActiveCallback(),
+                 actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>::SimpleFeedbackCallback());
 
     ac_.waitForResult();
 
@@ -155,6 +158,10 @@ public:
       ROS_INFO("Travelling to goal");
     else
       ROS_INFO("The base failed to move");
+  }
+  void doneCb(const actionlib::SimpleClientGoalState& state, const move_base_msgs::MoveBaseResultConstPtr& result)
+  {
+    ROS_INFO("Ended navigation with state [%s]", state.toString().c_str());
   }
 
   void msgCallback(const geometry_msgs::PoseWithCovarianceStamped& amcl_pose)

@@ -150,9 +150,6 @@ target_link_libraries(laser_tf_broadcaster ${catkin_LIBRARIES})
 add_executable(camera_tf_broadcaster src/camera_tf_broadcaster.cpp)
 target_link_libraries(camera_tf_broadcaster ${catkin_LIBRARIES})
 
-add_executable(gmapping_pose_broadcaster src/gmapping_pose_broadcaster.cpp)
-target_link_libraries(gmapping_pose_broadcaster ${catkin_LIBRARIES})
-
 add_executable(odom_noise src/odom_noise.cpp)
 target_link_libraries(odom_noise ${catkin_LIBRARIES})
 

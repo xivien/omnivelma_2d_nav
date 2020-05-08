@@ -7,6 +7,10 @@ Firstly run "source init.sh"
 
 usage: ./nav_static_map.sh
 
+Sending goals:
+a) use rviz GUI
+b) rosrun omnivelma_2d_nav simple_navigation_goals
+
 2. Navigation on a dynamic map and map building:
     - SLAM from Hector_mapping package used with global EKF localization filter
     - EKF filter for odometry

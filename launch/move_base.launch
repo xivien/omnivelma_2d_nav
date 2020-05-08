@@ -3,7 +3,7 @@
   <param name="/use_sim_time" value="true"/>
 
   <!-- map file -->
-  <arg name="map_file" default="$(find omnivelma_2d_nav)/maps/lab_map.yaml"/>
+  <arg name="map_file" default="$(find omnivelma_2d_nav)/maps/lab_updated.yaml"/>
 
   <!-- Base Velma Transforms and packages -->
   <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
