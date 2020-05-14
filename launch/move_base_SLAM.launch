@@ -5,12 +5,6 @@
   <!-- Base Velma Transforms and packages -->
   <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
 
-  <!-- Gmapping version -->
-  <!-- <node pkg="omnivelma_2d_nav" name="gmapping_pose_broadcaster" type="gmapping_pose_broadcaster" /> -->
-  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/gmapping_conf.launch" /> -->
-  <!-- <param name="/slam_gmapping/transform_publish_period" value="0.0"/> -->
-
-  <!-- Hector Version -->
   <!-- Hector Pose with covariance publisher -->
   <node pkg="omnivelma_2d_nav" name="hector_pose_cov" type="hector_pose_cov" />
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/hector_mapping.launch" />

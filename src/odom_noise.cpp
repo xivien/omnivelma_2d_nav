@@ -20,11 +20,11 @@ public:
   void callback_odom(const nav_msgs::Odometry &odom)
   {
     nav_msgs::Odometry odom_noisy;
-    std::normal_distribution<double> distribution_x(odom.pose.pose.position.x, var_);
-    std::normal_distribution<double> distribution_y(odom.pose.pose.position.y, var_);
+    std::normal_distribution<double> distribution_x(odom.twist.twist.linear.x, var_);
+    std::normal_distribution<double> distribution_y(odom.twist.twist.linear.y, var_);
     odom_noisy = odom;
-    odom_noisy.pose.pose.position.x = distribution_x(generator);
-    odom_noisy.pose.pose.position.y = distribution_y(generator);
+    odom_noisy.twist.twist.linear.x = distribution_x(generator);
+    odom_noisy.twist.twist.linear.y = distribution_y(generator);
 
     pub.publish(odom_noisy);
   }

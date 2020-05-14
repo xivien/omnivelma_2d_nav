@@ -7,8 +7,8 @@ local_costmap:
     robot_base_frame: base_footprint # nazwa frame z poczatkiem ukladu robota
 
     always_send_full_costmap: false # pelna mapa kosztow jest publikowana przy kazdym odswiezeniu
-    update_frequency: 5.0 # czestotliwosc odswiezania mapy
-    publish_frequency: 0.5 # publikowanie mapy zeby rviz mogl widziec
+    update_frequency: 10.0 # czestotliwosc odswiezania mapy
+    publish_frequency: 10.0 # publikowanie mapy zeby rviz mogl widziec
 
     static_map: false
     rolling_window: true # keeps the robot in the center of the costmap as it moves
