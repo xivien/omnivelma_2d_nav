@@ -1,6 +1,7 @@
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include <nav_msgs/Odometry.h>
 #include <ros/ros.h>
+#include <sensor_msgs/Imu.h>
 /*
 Hector mapping publishes in a covariance field a Hessian - it won't work with robot
 localization package, it needs to be changed to custom covariance values
@@ -12,8 +13,6 @@ public:
   {
     pub = n_.advertise<geometry_msgs::PoseWithCovarianceStamped>("/hector_mapping/pose", 10);
     sub = n_.subscribe("/poseupdate", 1000, &HectorCov::msgCallback, this);
-
-    // nh_private_.getParam("pose_covariance", pose_covar);
   }
 
   void msgCallback(const geometry_msgs::PoseWithCovarianceStampedConstPtr& pose_ptr)
@@ -34,8 +33,13 @@ private:
   ros::Subscriber sub;
   ros::Publisher pub;
 
-  std::vector<double> pose_covar{ 0.1404, 0, 0, 0,      0, 0, 0, 0.1404, 0, 0, 0,      0, 0, 0, 0.1404, 0, 0, 0,
-                                  0,      0, 0, 0.0004, 0, 0, 0, 0,      0, 0, 0.0004, 0, 0, 0, 0,      0, 0, 0.0004 };
+  std::vector<double> pose_covar{ 0.1404, 0, 0, 0, 0, 0, 
+                                  0, 0.1404, 0, 0, 0, 0, 
+                                  0, 0, 0.1404, 0, 0, 0,
+                                  0, 0, 0, 0.0004, 0, 0, 
+                                  0, 0, 0, 0, 0.0004, 0, 
+                                  0, 0, 0, 0, 0, 0.0004 };
+
 };
 
 int main(int argc, char** argv)

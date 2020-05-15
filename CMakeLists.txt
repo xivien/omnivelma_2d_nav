@@ -153,8 +153,11 @@ target_link_libraries(camera_tf_broadcaster ${catkin_LIBRARIES})
 add_executable(odom_noise src/odom_noise.cpp)
 target_link_libraries(odom_noise ${catkin_LIBRARIES})
 
-add_executable(hector_pose_cov src/hector_pose_cov.cpp)
-target_link_libraries(hector_pose_cov ${catkin_LIBRARIES})
+add_executable(message_cov src/message_cov.cpp)
+target_link_libraries(message_cov ${catkin_LIBRARIES})
+
+add_executable(hector_cov src/hector_cov.cpp)
+target_link_libraries(hector_cov ${catkin_LIBRARIES})
 
 add_executable(simple_navigation_goals src/simple_navigation_goals.cpp)
 target_link_libraries(simple_navigation_goals ${catkin_LIBRARIES})

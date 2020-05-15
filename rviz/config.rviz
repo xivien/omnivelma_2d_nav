@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Local_Plan1
+        - /Odometry1
         - /PoseArray1
       Splitter Ratio: 0.5
     Tree Height: 755
@@ -278,7 +279,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: false
+      Enabled: true
       Keep: 1
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -292,9 +293,9 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.05000000074505806
         Value: Arrow
-      Topic: /amcl/filtered
+      Topic: /odom
       Unreliable: false
-      Value: false
+      Value: true
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
       Covariance:
@@ -312,7 +313,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: false
+      Enabled: true
       Keep: 1
       Name: Odometry
       Position Tolerance: 0.10000000149011612
@@ -328,7 +329,7 @@ Visualization Manager:
         Value: Arrow
       Topic: /odom/filtered
       Unreliable: false
-      Value: false
+      Value: true
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.10000000149011612
@@ -403,16 +404,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 20.8533935546875
+      Distance: 8.499218940734863
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.0580090284347534
-        Y: -1.1049960851669312
-        Z: 1.168563723564148
+        X: 0.2664691209793091
+        Y: -0.4710958003997803
+        Z: 1.1677743196487427
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
