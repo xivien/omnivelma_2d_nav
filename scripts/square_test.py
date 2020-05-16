@@ -25,7 +25,7 @@ class square_test:
         rospy.sleep(1)
         self.error_pub = rospy.Publisher("/error", Pose2D, queue_size=10)
         self.gazebo_odom_subscriber = rospy.Subscriber(
-            "/odom", Odometry, self.callback_read_gazebo_odom)
+            "/PoseGlob", Odometry, self.callback_read_gazebo_odom)
 
         self.freq = 10
         self.rate = rospy.Rate(self.freq)  # 10hz
@@ -74,6 +74,7 @@ class square_test:
 
         self.pub.publish(self.new_msg)
         self.rate.sleep()
+        rospy.sleep(1.)
         self.bag.close()
 
     def get_vel_sign(self, direct, omega):
@@ -103,10 +104,10 @@ class square_test:
             x = dest.pose.position.x
             y = dest.pose.position.y
 
-            dx = x - self.current_x
-            dy = y - self.current_y
+            dx = x - self.ideal_x
+            dy = y - self.ideal_y
 
-            direct = m.atan2(dy, dx) - self.current_theta
+            direct = m.atan2(dy, dx) - self.ideal_theta
 
             last_direct = direct
 
@@ -118,7 +119,7 @@ class square_test:
 
                 last_direct = direct
 
-                direct = m.atan2(dy, dx) - self.current_theta
+                direct = m.atan2(dy, dx) - self.ideal_theta
 
                 # cast to (-pi:pi) range
                 if direct < -m.pi:
@@ -131,8 +132,8 @@ class square_test:
 
             self.new_msg.angular.z = 0
 
-            dx = x - self.current_x
-            dy = y - self.current_y
+            dx = x - self.ideal_x
+            dy = y - self.ideal_y
             dist = m.sqrt(dx*dx + dy*dy)
             while (abs(dist) <= abs(last_dist) or dist > self.tol):
                 self.new_msg.linear.x = self.vel
@@ -141,15 +142,15 @@ class square_test:
 
                 last_dist = dist
 
-                dx = x - self.current_x
-                dy = y - self.current_y
+                dx = x - self.ideal_x
+                dy = y - self.ideal_y
 
                 dist = m.sqrt(dx*dx + dy*dy)
 
             self.new_msg.linear.x = 0
 
         last_direct = 1000000
-        direct = - self.current_theta
+        direct = - self.ideal_theta
 
         # turn to starting pose
         while True:
@@ -160,7 +161,7 @@ class square_test:
 
             last_direct = direct
 
-            direct = -self.current_theta
+            direct = -self.ideal_theta
 
             # cast to (-pi:pi) range
             if direct < -m.pi:
@@ -181,8 +182,8 @@ class square_test:
             x = dest.pose.position.x
             y = dest.pose.position.y
 
-            dx = x - self.current_x
-            dy = y - self.current_y
+            dx = x - self.ideal_x
+            dy = y - self.ideal_y
 
             while ((abs(dx) <= abs(last_dx) and abs(dy) <= abs(last_dy)) or abs(dx) >= self.tol or abs(dy) >= self.tol):
 
@@ -194,8 +195,8 @@ class square_test:
                 last_dx = dx
                 last_dy = dy
 
-                dx = x - self.current_x
-                dy = y - self.current_y
+                dx = x - self.ideal_x
+                dy = y - self.ideal_y
 
         self.new_msg.linear.x = 0
         self.new_msg.linear.y = 0
@@ -203,5 +204,5 @@ class square_test:
 
 if __name__ == '__main__':
     rospy.init_node('Square_test')
-    square_test(1)
+    square_test(2, "square_test_EKF_odom.bag")
     rospy.spin()

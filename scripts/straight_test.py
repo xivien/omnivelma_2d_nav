@@ -26,7 +26,7 @@ class straight_test:
         rospy.sleep(1)
         self.error_pub = rospy.Publisher("/error", Pose2D, queue_size=10)
         self.gazebo_odom_subscriber = rospy.Subscriber(
-            "/odom", Odometry, self.callback_read_gazebo_odom)
+            "/PoseGlob", Odometry, self.callback_read_gazebo_odom)
 
         self.freq = 10
         self.rate = rospy.Rate(self.freq)  # 10hz
@@ -56,7 +56,7 @@ class straight_test:
         vel = 0.25
         x = msg.data
 
-        dist = m.sqrt((x-self.current_x)*(x-self.current_x))
+        dist = m.sqrt((x-self.ideal_x)*(x-self.ideal_y))
 
         last_dist = 100000
         new_msg.linear.x = vel
@@ -68,7 +68,7 @@ class straight_test:
 
             last_dist = dist
 
-            dx = x - self.current_x
+            dx = x - self.ideal_x
 
             dist = m.sqrt(dx*dx)
 
@@ -78,7 +78,7 @@ class straight_test:
         rospy.sleep(1)
         x = 0
 
-        dist = m.sqrt(self.current_x*self.current_x)
+        dist = m.sqrt(self.ideal_x*self.ideal_x)
         last_dist = 100000
 
         new_msg.linear.x = -vel
@@ -89,7 +89,7 @@ class straight_test:
             self.rate.sleep()
             last_dist = dist
 
-            dx = x - self.current_x
+            dx = x - self.ideal_x
 
             dist = m.sqrt(dx*dx)
 

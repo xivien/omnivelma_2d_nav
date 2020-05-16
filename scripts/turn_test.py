@@ -25,7 +25,7 @@ class turn_test:
         rospy.sleep(1)
         self.error_pub = rospy.Publisher("/error", Pose2D, queue_size=10)
         self.gazebo_odom_subscriber = rospy.Subscriber(
-            "/odom", Odometry, self.callback_read_gazebo_odom)
+            "/PoseGlob", Odometry, self.callback_read_gazebo_odom)
 
         self.freq = 10
         self.rate = rospy.Rate(self.freq)  # 10hz
@@ -59,9 +59,9 @@ class turn_test:
 
         new_msg.angular.z = omega
 
-        last_theta = self.current_theta
+        last_theta = self.ideal_theta
 
-        while (self.current_theta + spinned) < desired:
+        while (self.ideal_theta + spinned) < desired:
 
             self.pub.publish(new_msg)
             self.rate.sleep()
@@ -69,7 +69,7 @@ class turn_test:
             if self.current_theta < last_theta:
                 spinned += 2 * m.pi
 
-            last_theta = self.current_theta
+            last_theta = self.ideal_theta
 
         new_msg.angular.z = 0
         self.pub.publish(new_msg)
