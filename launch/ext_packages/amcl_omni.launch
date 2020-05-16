@@ -32,8 +32,6 @@
     <param name="laser_lambda_short" value="0.1"/>
     <param name="laser_model_type" value="likelihood_field"/>
     
-
-    <!-- make amcl update faster-->
     <param name="update_min_d" value="0.1"/>
     <param name="update_min_a" value="0.25"/>
 

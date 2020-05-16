@@ -33,21 +33,21 @@ public:
     // sum_y += distribution_y(generator);
     // sum_th += distribution_th(generator);
 
-    odom_noisy.twist.twist.linear.x = distribution_vx(generator);
-    odom_noisy.twist.twist.linear.y = distribution_vy(generator);
-    odom_noisy.twist.twist.angular.y = distribution_vth(generator);
+    // odom_noisy.twist.twist.linear.x = distribution_vx(generator);
+    // odom_noisy.twist.twist.linear.y = distribution_vy(generator);
+    // odom_noisy.twist.twist.angular.y = distribution_vth(generator);
 
     // odom_noisy.pose.pose.position.x += sum_x;
     // odom_noisy.pose.pose.position.y += sum_y;
     // odom_noisy.pose.pose.orientation.z += sum_th;
 
-    odom_noisy.pose.covariance[0] = 0.00;
-    odom_noisy.pose.covariance[7] = 0.00;
-    odom_noisy.pose.covariance[35] = 0.00;
+    odom_noisy.pose.covariance[0] = 0.01;
+    odom_noisy.pose.covariance[7] = 0.01;
+    odom_noisy.pose.covariance[35] = 0.1;
 
-    odom_noisy.twist.covariance[0] = 0.00;
-    odom_noisy.twist.covariance[7] = 0.00;
-    odom_noisy.twist.covariance[35] = 0.00;
+    odom_noisy.twist.covariance[0] = 0.002;
+    odom_noisy.twist.covariance[7] = 0.002;
+    odom_noisy.twist.covariance[35] = 0.002;
     pub.publish(odom_noisy);
   }
 };

@@ -8,7 +8,7 @@ local_costmap:
 
     always_send_full_costmap: false # pelna mapa kosztow jest publikowana przy kazdym odswiezeniu
     update_frequency: 10.0 # czestotliwosc odswiezania mapy
-    publish_frequency: 10.0 # publikowanie mapy zeby rviz mogl widziec
+    publish_frequency: 5.0 # publikowanie mapy zeby rviz mogl widziec
 
     static_map: false
     rolling_window: true # keeps the robot in the center of the costmap as it moves

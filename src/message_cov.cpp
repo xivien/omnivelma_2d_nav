@@ -20,10 +20,10 @@ public:
     sensor_msgs::Imu imu;
     imu = *imu_ptr;
 
-    imu.orientation_covariance[8] = 0.00;
-    imu.angular_velocity_covariance[8] = 0.00;
-    imu.linear_acceleration_covariance[0] = 0.00;
-    imu.linear_acceleration_covariance[4] = 0.00;
+    imu.orientation_covariance[8] = 0.01;
+    imu.angular_velocity_covariance[8] = 1e-7;
+    imu.linear_acceleration_covariance[0] = 1e-5;
+    imu.linear_acceleration_covariance[4] = 1e-5;
 
     pub_imu.publish(imu);
   }
