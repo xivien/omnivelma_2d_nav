@@ -47,7 +47,7 @@ public:
 
     odom_noisy.twist.covariance[0] = 0.002;
     odom_noisy.twist.covariance[7] = 0.002;
-    odom_noisy.twist.covariance[35] = 0.002;
+    odom_noisy.twist.covariance[35] = 0.01;
     pub.publish(odom_noisy);
   }
 };

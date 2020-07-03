@@ -8,6 +8,7 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 from numpy import sign
 import rosbag
 import sys
+import tf
 
 
 class square_test:
@@ -20,6 +21,7 @@ class square_test:
         self.odom_subscriber = rospy.Subscriber(
             "/odom/filtered", Odometry, self.callback_read_odom)
         self.pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
+        self.listener = tf.TransformListener()
 
         # needed so ros has time to get self.current_x for two publishers
         rospy.sleep(1)
@@ -27,8 +29,8 @@ class square_test:
         self.gazebo_odom_subscriber = rospy.Subscriber(
             "/PoseGlob", Odometry, self.callback_read_gazebo_odom)
 
-        self.freq = 10
-        self.rate = rospy.Rate(self.freq)  # 10hz
+        self.freq = 20
+        self.rate = rospy.Rate(self.freq)  # 20hz
 
     def callback_read_odom(self, msg):
         self.current_x = msg.pose.pose.position.x
@@ -47,23 +49,34 @@ class square_test:
         error = Pose2D()
         error.x = self.current_x - self.ideal_x
         error.y = self.current_y - self.ideal_y
+        last_theta = error.theta
         error.theta = self.current_theta - self.ideal_theta
+        if(abs(error.theta) > 1):
+            error.theta = last_theta
         self.error_pub.publish(error)
+        (trans, rot) = self.listener.lookupTransform(
+            '/map', '/base_footprint', rospy.Time(0))
+        _, _, glob_theta = euler_from_quaternion(rot)
         try:
+
             #    writing to a bag file
             self.bag.write('/gazebo_odom', Pose2D(self.ideal_x,
                                                   self.ideal_y, self.ideal_theta))
-            self.bag.write('/odometry', Pose2D(self.current_x,
-                                               self.current_y, self.current_theta))
+            # self.bag.write('/odometry', Pose2D(self.current_x,
+            #                                    self.current_y, self.current_theta))
+            self.bag.write('/odometry', Pose2D(trans[0], trans[1], glob_theta))
+
             self.bag.write('/error', error)
         except:
-            print "File Closed"
+            self.rate.sleep()
+            self.bag.close()
+            print("bag closed")
 
     def callback_set_vel(self, msg):
         self.new_msg = Twist()
 
-        self.omega = 0.15
-        self.vel = 0.25
+        self.omega = 0.5
+        self.vel = 0.5
 
         self.path = msg.poses
         self.stop_msg = Twist()
@@ -75,7 +88,8 @@ class square_test:
         self.pub.publish(self.new_msg)
         self.rate.sleep()
         rospy.sleep(1.)
-        self.bag.close()
+        # self.bag.close()
+        # rospy.signal_shutdown("a")
 
     def get_vel_sign(self, direct, omega):
 
@@ -98,6 +112,7 @@ class square_test:
 
     def mode_1(self):
         for dest in self.path:
+
             last_direct = 1000000
             last_dist = 100000
 
@@ -112,6 +127,7 @@ class square_test:
             last_direct = direct
 
             while True:
+
                 self.new_msg.angular.z = self.get_vel_sign(direct, self.omega)
 
                 self.pub.publish(self.new_msg)
@@ -136,6 +152,7 @@ class square_test:
             dy = y - self.ideal_y
             dist = m.sqrt(dx*dx + dy*dy)
             while (abs(dist) <= abs(last_dist) or dist > self.tol):
+
                 self.new_msg.linear.x = self.vel
                 self.pub.publish(self.new_msg)
                 self.rate.sleep()
@@ -203,6 +220,6 @@ class square_test:
 
 
 if __name__ == '__main__':
-    rospy.init_node('Square_test')
-    square_test(2, "square_test_EKF_odom.bag")
+    rospy.init_node('Square_test',  disable_signals=True)
+    square_test(1, "square_test_EKFamcl_rot.bag")
     rospy.spin()

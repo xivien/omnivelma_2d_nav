@@ -23,7 +23,7 @@ DWAPlannerROS:
   xy_goal_tolerance: 0.2 #The tolerance in meters for the controller in the x & y distance when achieving a goal
   latch_xy_goal_tolerance: true #robot zatrzyma sie po osiagnieciu celu w zakresie tolerancji nawet jesli zatrzyma sie poza ta tolerancja
 
-  sim granularity: 0.02
+  sim_granularity: 0.02
   sim_time: 4 # symulowanie czasu do przodu w trajektorii [s]
   vx_samples: 8 #liczba probek uzywana przy liczeniu mozliwych predkosci x
   vy_samples: 10 #liczba probek uzywana przy liczeniu mozliwych predkosci y

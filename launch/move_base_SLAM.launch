@@ -6,11 +6,13 @@
   <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
 
   <!-- Hector Pose with covariance publisher -->
-  <node pkg="omnivelma_2d_nav" name="hector_cov" type="hector_cov" />
-  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/hector_mapping.launch" />
+  <!-- <node pkg="omnivelma_2d_nav" name="hector_cov" type="hector_cov" />
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/hector_mapping.launch" /> -->
+  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_SLAM.launch" /> -->
+  <!-- gmapping -->
+  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/gmapping.launch" />
 
   <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
-  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map_SLAM.launch" />
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" />
