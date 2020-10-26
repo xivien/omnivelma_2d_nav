@@ -12,21 +12,21 @@
   <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" /> -->
 
   <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/amcl_omni.launch" /> -->
-  <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" />
+  <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_odom.launch" /> -->
   <!-- <include file="$(find omnivelma_2d_nav)/launch/ext_packages/ekf_map.launch" /> -->
 
-  <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"> -->
-    <!-- <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" /> -->
-    <!-- <rosparam file="$(find omnivelma_2d_nav)/yaml/local_costmap.yaml" command="load" /> -->
-    <!-- <rosparam file="$(find omnivelma_2d_nav)/yaml/global_planner.yaml" command="load" /> -->
-    <!-- <rosparam file="$(find omnivelma_2d_nav)/yaml/local_planner.yaml" command="load" /> -->
-    <!-- <rosparam file="$(find omnivelma_2d_nav)/yaml/move_base_params.yaml" command="load" /> -->
-<!--  -->
-    <!-- <param name="base_global_planner" value="global_planner/GlobalPlanner" /> -->
-    <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> -->
-    <!-- <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" /> -->
-    <!-- <remap from="odom" to="odom/filtered"/> -->
-<!--  -->
-  <!-- </node> -->
+  <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/global_costmap.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/local_costmap.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/global_planner.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/local_planner.yaml" command="load" />
+    <rosparam file="$(find omnivelma_2d_nav)/yaml/move_base_params.yaml" command="load" />
+
+    <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    <remap from="odom" to="odom/filtered"/>
+
+  </node> -->
   
 </launch>
