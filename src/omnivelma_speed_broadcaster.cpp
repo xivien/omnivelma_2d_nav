@@ -91,7 +91,7 @@ void twistCallback(const geometry_msgs::Twist::ConstPtr& msg)
 	vels.fl = (velForw + velRight - (modelLength + modelWidth) * rotLeft * 2) / wheelRadius;
 	vels.rl = (velForw - velRight - (modelLength + modelWidth) * rotLeft * 2) / wheelRadius;
 	vels.rr = (velForw + velRight + (modelLength + modelWidth) * rotLeft * 2) / wheelRadius;
-	//publisher.publish(vels);
+	publisher.publish(vels);
 
 	velInit = true;
 
@@ -180,7 +180,6 @@ int main(int argc, char **argv)
 	}
 
 	//odom
-	//this is already done in omnivelma
 	/*ros::NodeHandle odometryHandle;
 	ros::Subscriber odometrySub = odometryHandle.subscribe<nav_msgs::Odometry>("/omnivelma/odom", 10, odometryCallback);
 	if(!odometrySub)

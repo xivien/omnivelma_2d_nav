@@ -11,7 +11,7 @@ class MessageCov
 public:
   MessageCov()
   {
-    sub_imu = n_.subscribe("/wewucho/imu", 1000, &MessageCov::ImuCallback, this);
+    sub_imu = n_.subscribe("/imu/filtered", 1000, &MessageCov::ImuCallback, this);
     pub_imu = n_.advertise<sensor_msgs::Imu>("/imu_cov", 10);
   }
 
@@ -20,8 +20,8 @@ public:
     sensor_msgs::Imu imu;
     imu = *imu_ptr;
 
-    imu.orientation_covariance[8] = 0.01;
-    imu.angular_velocity_covariance[8] = 1e-7;
+    imu.orientation_covariance[8] = 0.001;
+    imu.angular_velocity_covariance[8] = 1e-6;
     imu.linear_acceleration_covariance[0] = 1e-5;
     imu.linear_acceleration_covariance[4] = 1e-5;
 

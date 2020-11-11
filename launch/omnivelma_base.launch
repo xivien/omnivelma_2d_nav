@@ -9,11 +9,11 @@
   <!-- transform broadcasters -->
   <!-- <node pkg="omnivelma_2d_nav" name="camera_tf_broadcaster" type="camera_tf_broadcaster" /> -->
   <!-- <node pkg="omnivelma_2d_nav" name="laser_tf_broadcaster" type="laser_tf_broadcaster" />  -->
-
+  <node pkg="odszumiacz" name="odszumiacz" type="odszumiacz" args="/wewucho/imu imu/filtered 10"/>
+  <node pkg="omnivelma_2d_nav" name="odometry_kin" type="odometry" />
   <!-- noisy odometry -->
-  <node pkg="omnivelma_2d_nav" name="odom_noise" type="odom_noise" />
+  <!-- <node pkg="omnivelma_2d_nav" name="odom_noise" type="odom_noise" /> -->
   <!-- throttle odom -->
-  <node name="odom_throttle" type="throttle" pkg="topic_tools" args="messages /odom 50 /odom/throttled" />
   <!-- Covariances -->
   <node pkg="omnivelma_2d_nav" name="message_cov" type="message_cov" />
   <!-- rviz vizualization -->
