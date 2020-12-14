@@ -16,22 +16,15 @@
 
 using boost::lexical_cast;
 
+// BASED ON PIOTR WALAS CODE
 /// Nadajnik
 ros::Publisher publisher;
 ros::Publisher forSmootherPublisher;
 ros::Publisher odometryPublisher;
 
-const double wheelRadius = 0.1;
+const double wheelRadius = 0.1 * 1.0164;
 const double modelWidth = 0.76;
 const double modelLength = 0.72;
-
-//The following parameters are defined due to abnormal behaviour od navigation_stack
-//which ommits speed (and probably acceleration limits) defined in 
-//base_local_planner_params.yaml
-double linMaxSpeed = 0.055;
-double rotMaxSpeed = 0.08;
-double linMaxAcc = 0.01;
-double rotMaxAcc = 0.01;
 
 ros::Duration velPublisherSleep(0.01);
 
@@ -98,29 +91,6 @@ void twistCallback(const geometry_msgs::Twist::ConstPtr& msg)
 	newVelLock.unlock();	
 }
 
-// void odometryCallback(const nav_msgs::Odometry::ConstPtr& msg)
-// {
-// 	nav_msgs::Odometry odom;
-// 	odom.header.stamp = msg->header.stamp;
-// 	odom.header.frame_id = "odom";
-// 	odom.child_frame_id = "base_footprint";
-// 	//odom.child_frame_id = "omnivelma";
-
-// 	//set the position
-// 	odom.pose.pose.position.x = msg->pose.pose.position.x;
-// 	odom.pose.pose.position.y = msg->pose.pose.position.y;
-// 	odom.pose.pose.position.z = msg->pose.pose.position.z;
-
-// 	odom.pose.pose.orientation = msg->pose.pose.orientation;
-
-// 	//set the velocity
-// 	odom.twist.twist.linear.x = msg->twist.twist.linear.x;
-// 	odom.twist.twist.linear.y = msg->twist.twist.linear.y;
-// 	odom.twist.twist.angular.z = msg->twist.twist.angular.z;
-	
-// 	odometryPublisher.publish(odom);
-// }
-
 void sendVelConstantly()
 {
 	while(ros::ok())		
@@ -151,9 +121,6 @@ int main(int argc, char **argv)
 	std::string receiveTopicName;
 	n.param<std::string>("vel_receive_topic", receiveTopicName, "cmd_vel");
 
-	/*std::string sendToSmootherTopicName;
-	n.param<std::string>("cmd_send_to_smoother", sendToSmootherTopicName, "inverted_cmd_vel");*/
-
 	std::string rot;
 	n.param<std::string>("rotation", rot, "0");
 	if(rot == "90")
@@ -178,20 +145,6 @@ int main(int argc, char **argv)
 		ROS_FATAL_STREAM("Nie można stworzyć nadajnika " + sendTopicName);
 		return -2;
 	}
-
-	//odom
-	/*ros::NodeHandle odometryHandle;
-	ros::Subscriber odometrySub = odometryHandle.subscribe<nav_msgs::Odometry>("/omnivelma/odom", 10, odometryCallback);
-	if(!odometrySub)
-	{
-		ROS_FATAL("Nie można stworzyć odbiornika /omnivelma/odom");
-	}
-	odometryPublisher = handle.advertise<nav_msgs::Odometry>("/odom", 50);
-	if(!odometryPublisher)
-	{
-		ROS_FATAL_STREAM("Nie można stworzyć nadajnika /odom");
-		return -3;
-	}*/
 
 	//start cmd_vel spawn constantly
 	std::thread c(sendVelConstantly);

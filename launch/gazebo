@@ -1,40 +1,17 @@
 #!/bin/bash
 
-#Uruchom Gazebo
-#Gazebo wczytuje dwa modele, Omnivelmę i Pseudovelmę
-#Lalkarz wysysła Vels do Widelnicy, która dzieli Vels dla Omnivelmy i Pseudovelmy.
-#Lalkarz wysyła Twist do Transmutatora, który wysyła Vels do Widelnicy
-
-# run gazebo with loaded world
-# load Omnivelma
-# transmutator changes msg type to omnivelma type
-# dziadzio is optional 
-
-# #Ustaw ścieżkę modeli dla Gazebo
-# export GAZEBO_PLUGIN_PATH="$GAZEBO_PLUGIN_PATH:/opt/ros/melodic/lib"
-# export GAZEBO_MODEL_PATH="$GAZEBO_MODEL_PATH:/velma_sim/src/omnivelma/src"
+#Run gazebo, this file is responsible for changing enviroment
 roslaunch velmaverse velmaverse.launch &
 PIDGAZ=$!
-
-# sending one msg to multiple topics
-# rosrun widelnica widelnica /omnivelma/vels /pseudovelma/vels &
-# PIDWID=$!
 
 # chagning geometry_msgs/Twist to omnivelma/Vels and publishing
 rosrun transmutator transmutator /omnivelma/vels #/widelnica/vels &
 PIDTRA=$!
 
-# gui for steering the robot
-# rosrun lalkarz lalkarz -v /widelnica/vels -t /transmutator/twist -e /lalkarz/encoders &
-# PIDLAL=$!
-
 # changing encoder msg type
 rosrun dziadzio dziadzio /omnivelma/encoders /lalkarz/encoders &
 PIDDZI=$!
 
-# multiplot 
-# rqt_multiplot --multiplot-config ~/velma_sim/src/omnivelma/multiplot/gazebo.xml --multiplot-run-all &
-# PIDMUL=$!
 trap "kill $PIDDZI; kill $PIDTRA; kill $PIDGAZ;" SIGINT 
 
 echo "Wciśnij ^C, aby wyłączyć procesy"
