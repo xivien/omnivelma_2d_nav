@@ -1,7 +1,0 @@
-<launch>
-  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom" >
-    <rosparam command="load" file="$(find omnivelma_2d_nav)/yaml/ekf_odom.yaml" />
-    <remap from="odometry/filtered" to="odom/filtered"/>
-
-  </node>
-</launch>

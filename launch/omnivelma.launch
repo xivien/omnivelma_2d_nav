@@ -1,3 +1,3 @@
 <launch>
-	<node name="gazebo" type="gazebo" pkg="omnivelma_2d_nav" />
+	<node name="gazebo" type="gazebo" pkg="omnivelma_nav_setup" />
 </launch>
