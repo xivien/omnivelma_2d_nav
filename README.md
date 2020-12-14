@@ -1,4 +1,4 @@
-# omnivelma_2d_nav
+# omnivelma_nav_setup
 Firstly run 
 ```source init.sh```
 
