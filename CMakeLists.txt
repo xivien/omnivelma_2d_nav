@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(omnivelma_2d_nav)
+project(omnivelma_nav_setup)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -40,9 +40,6 @@ target_link_libraries(laser_tf_broadcaster ${catkin_LIBRARIES})
 
 add_executable(camera_tf_broadcaster src/camera_tf_broadcaster.cpp)
 target_link_libraries(camera_tf_broadcaster ${catkin_LIBRARIES})
-
-add_executable(odom_noise src/odom_noise.cpp)
-target_link_libraries(odom_noise ${catkin_LIBRARIES})
 
 add_executable(message_cov src/message_cov.cpp)
 target_link_libraries(message_cov ${catkin_LIBRARIES})

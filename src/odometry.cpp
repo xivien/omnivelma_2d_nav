@@ -11,7 +11,7 @@ class CalcOdom
 private:
     ros::Publisher pub;
     ros::Subscriber number_subscriber;
-    float wheelRadius = 0.1;
+    float wheelRadius = 0.1 * 1.0164; // value from odom correction calculation;
     float modelWidth = 0.76;
     float modelLength = 0.72;
     float flVel = 0;
@@ -46,9 +46,9 @@ public:
     }
     void callback_vels(const omnivelma_msgs::EncodersStamped &encoders)
     {
-        //publish every 10th message
+        //publish every 20th message
         delay++;
-        if (delay % 10 != 0)
+        if (delay % 20 != 0)
         {
             return;
         }
@@ -106,15 +106,6 @@ public:
         odometryMsg.pose.pose.orientation.y = odom_quat.y();
         odometryMsg.pose.pose.orientation.z = odom_quat.z();
         odometryMsg.pose.pose.orientation.w = odom_quat.w();
-
-        // covariances
-        odometryMsg.pose.covariance[0] = 0.001;
-        odometryMsg.pose.covariance[7] = 0.001;
-        odometryMsg.pose.covariance[35] = 0.01;
-
-        odometryMsg.twist.covariance[0] = 0.0002;
-        odometryMsg.twist.covariance[7] = 0.0002;
-        odometryMsg.twist.covariance[35] = 0.001;
 
         pub.publish(odometryMsg);
 

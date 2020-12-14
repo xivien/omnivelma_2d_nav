@@ -3,7 +3,7 @@
 #uruchom gazebo, a nastepnie zalezne node'y
 #pliki launch rosa nie obsługują delaya miedzy ladowaniami node'ow, co generuje bledy
 
-roslaunch omnivelma_2d_nav omnivelma.launch &
+roslaunch omnivelma_nav_setup omnivelma.launch &
 PIDGAZ=$!
 sleep 5
 # read -n 1 -p "Press any button to continue loading..." -s

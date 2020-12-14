@@ -6,7 +6,7 @@
   <!-- <arg name="map_file" default="$(find omnivelma_2d_nav)/maps/lab_updated.yaml"/> -->
 
   <!-- Base Velma Transforms and packages -->
-  <include file="$(find omnivelma_2d_nav)/launch/omnivelma_base.launch" />
+  <include file="$(find omnivelma_nav_setup)/launch/omnivelma_base.launch" />
 
   <!-- Run the map server -->
   <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" /> -->

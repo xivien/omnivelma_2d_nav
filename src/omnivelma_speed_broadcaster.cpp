@@ -98,28 +98,28 @@ void twistCallback(const geometry_msgs::Twist::ConstPtr& msg)
 	newVelLock.unlock();	
 }
 
-void odometryCallback(const nav_msgs::Odometry::ConstPtr& msg)
-{
-	nav_msgs::Odometry odom;
-	odom.header.stamp = msg->header.stamp;
-	odom.header.frame_id = "odom";
-	odom.child_frame_id = "base_footprint";
-	//odom.child_frame_id = "omnivelma";
+// void odometryCallback(const nav_msgs::Odometry::ConstPtr& msg)
+// {
+// 	nav_msgs::Odometry odom;
+// 	odom.header.stamp = msg->header.stamp;
+// 	odom.header.frame_id = "odom";
+// 	odom.child_frame_id = "base_footprint";
+// 	//odom.child_frame_id = "omnivelma";
 
-	//set the position
-	odom.pose.pose.position.x = msg->pose.pose.position.x;
-	odom.pose.pose.position.y = msg->pose.pose.position.y;
-	odom.pose.pose.position.z = msg->pose.pose.position.z;
+// 	//set the position
+// 	odom.pose.pose.position.x = msg->pose.pose.position.x;
+// 	odom.pose.pose.position.y = msg->pose.pose.position.y;
+// 	odom.pose.pose.position.z = msg->pose.pose.position.z;
 
-	odom.pose.pose.orientation = msg->pose.pose.orientation;
+// 	odom.pose.pose.orientation = msg->pose.pose.orientation;
 
-	//set the velocity
-	odom.twist.twist.linear.x = msg->twist.twist.linear.x;
-	odom.twist.twist.linear.y = msg->twist.twist.linear.y;
-	odom.twist.twist.angular.z = msg->twist.twist.angular.z;
+// 	//set the velocity
+// 	odom.twist.twist.linear.x = msg->twist.twist.linear.x;
+// 	odom.twist.twist.linear.y = msg->twist.twist.linear.y;
+// 	odom.twist.twist.angular.z = msg->twist.twist.angular.z;
 	
-	odometryPublisher.publish(odom);
-}
+// 	odometryPublisher.publish(odom);
+// }
 
 void sendVelConstantly()
 {
